@@ -599,8 +599,11 @@ public class GridDiscoveryManager extends GridManagerAdapter<DiscoverySpi> {
 
                     registeredCaches.clear();
 
-                    for (AffinityTopologyVersion histVer : discoCacheHist.keySet())
-                        discoCacheHist.remove(histVer);
+                    for (AffinityTopologyVersion histVer : discoCacheHist.keySet()) {
+                        Object rmvd = discoCacheHist.remove(histVer);
+
+                        assert rmvd != null : histVer;
+                    }
 
                     topHist.clear();
 
